@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<style>
+     /* Re-use or adapt styles from about.html */
+    .static-content-container {
+        background-color: #2a2a40;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+        width: 90%;
+        max-width: 800px;
+        border: 2px solid #9b59b6;
+        margin: 50px auto;
+        color: #f0f0f0;
+        text-align: left;
+        line-height: 1.6;
+    }
+
+    .static-content-container h2 {
+        color: #bb86fc;
+        margin-top: 0;
+        margin-bottom: 25px;
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .static-content-container {
+        background-color: #2a2a40;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+        width: 95%; /* Increase width percentage */
+        max-width: 1100px; /* Increase maximum width (adjust as needed) */
+        border: 2px solid #9b59b6;
+        /* margin: 50px auto; Keeping margin: 0 auto; with the wrapper */
+        margin: 0 auto; /* Ensure horizontal centering */
+        color: #f0f0f0;
+        text-align: left;
+        line-height: 1.6;
+    }
+
+    .contact-info p strong {
+        color: #d1aaff; /* Label color */
+    }
+</style>
+
+<div class="static-content-container">
+    <h2>Contact Us</h2>
+
+    <p>If you have any questions, feedback, or inquiries, please feel free to reach out to us.</p>
+
+    <div class="contact-info">
+        <p><strong>Email:</strong> support@deepfakedetector.example.com</p> {# Replace with a real email #}
+        <p><strong>Twitter:</strong> @DeepfakeDetect</p> {# Replace with a real Twitter handle #}
+        <p><strong>LinkedIn:</strong> Deepfake Detector Team</p> {# Replace with a real LinkedIn page #}
+    </div>
+
+    <p>We aim to respond to all inquiries within 48 hours.</p>
+
+</div>
+{% endblock %}

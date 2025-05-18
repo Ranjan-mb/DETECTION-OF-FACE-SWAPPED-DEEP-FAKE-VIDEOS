@@ -1,0 +1,248 @@
+{% extends 'base.html' %}
+{% block title %}Detection Result{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #1e1e2f;
+        color: #f0f0f0;
+        margin: 0;
+    }
+
+    .result-container {
+        background-color: #2a2a40;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        width: 90%;
+        max-width: 600px;
+        border: 2px solid #9b59b6;
+        margin: 50px auto;
+    }
+
+    h2 {
+        color: #bb86fc;
+        margin-bottom: 20px;
+        font-size: 28px;
+    }
+
+    p {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .confidence {
+        font-weight: bold;
+        color: #a96bff;
+    }
+
+    .chart-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .chart-container img {
+        max-width: 250px;
+        height: auto;
+        border: 2px solid #444;
+        box-shadow: 0 0 20px 4px rgba(0, 255, 255, 0.6);
+        animation: glow-pulse 2s infinite ease-in-out;
+        border-radius: 8px;
+    }
+
+    @keyframes glow-pulse {
+        0% {
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+        50% {
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+        }
+        100% {
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+    }
+
+    .error {
+        color: #ff6b6b;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    a {
+        display: inline-block;
+        margin-top: 25px;
+        padding: 12px 24px;
+        background-color: #7e57c2;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    a:hover {
+        background-color: #6935b3;
+    }
+
+    .image-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Adjust minmax as needed */
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .image-grid img {
+        max-width: 100%;
+        height: auto;
+        border: 1px solid #444;
+        border-radius: 4px;
+    }
+
+    .frames-container, .faces-container {
+        margin-top: 30px;
+        text-align: left;
+    }
+
+    .frames-container h3, .faces-container h3 {
+        color: #ccc;
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+    .analysis-details-container {
+        background-color: #2b2b3d; /* Slightly lighter dark background */
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        text-align: left; /* Align text within the container */
+        border: 1px solid #444; /* Subtle border */
+    }
+
+    .analysis-details-container h3 {
+        color: #bb86fc; /* Header color */
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: 22px;
+        text-align: center; /* Center the heading */
+    }
+
+    .details-grid {
+        display: flex; /* Use flexbox for layout */
+        justify-content: space-around; /* Space out the items */
+        gap: 20px; /* Gap between items */
+        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    }
+
+    .detail-item {
+        background-color: #1e1e2f; /* Dark background for items */
+        padding: 15px;
+        border-radius: 6px;
+        text-align: center; /* Center text within item */
+        flex: 1; /* Allow items to grow */
+        min-width: 150px; /* Minimum width for items */
+        border: 1px solid #555; /* Subtle border for items */
+    }
+
+    .detail-item h4 {
+        color: #ddd; /* Label color */
+        margin: 0 0 10px 0;
+        font-size: 16px;
+    }
+
+    .detail-item p {
+        color: #00ff99; /* Value color (can adjust) */
+        font-size: 20px;
+        font-weight: bold;
+        margin: 0;
+    }
+
+     .analyzed-frames-section {
+        margin-top: 30px;
+        text-align: center; /* Center the heading and subtitle */
+     }
+
+     .analyzed-frames-section h3 {
+         color: #00ff99; /* Highlight color for this heading */
+         margin-bottom: 10px;
+         font-size: 24px;
+     }
+
+     .analyzed-frames-section p {
+         color: #ccc;
+         font-size: 16px;
+         margin-bottom: 20px;
+     }
+
+</style>
+
+<div class="result-container">
+    <h2>Detection Result</h2>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% else %}
+        <p>The video is predicted as: <span style="font-weight: bold;">{{ prediction }}</span></p>
+        <p>Confidence: <span class="confidence">{{ confidence }}%</span></p>
+        <div class="chart-container">
+            <h3 style="color: #ccc;">Confidence Breakdown</h3>
+            <img src="data:image/png;base64,{{ chart }}" alt="Confidence Pie Chart">
+        </div>
+
+        {# Add the Analysis Details section here #}
+        <div class="analysis-details-container">
+            <h3>Analysis Details</h3>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <h4>Frames Analyzed</h4>
+                    <p>{{ frames_analyzed }}</p>
+                </div>
+                <div class="detail-item">
+                    <h4>Processing Time</h4>
+                    <p>{{ processing_time }}</p>
+                </div>
+                <div class="detail-item">
+                    <h4>Model Confidence</h4>
+                    <p>{{ confidence }}%</p> {# Confidence is already formatted in the view if needed, or format here #}
+                </div>
+            </div>
+        </div>
+
+        {# Add the Analyzed Frames heading and subtitle #}
+        <div class="analyzed-frames-section">
+            <h3>Analyzed Frames</h3>
+            <p>Key frames extracted and analyzed for manipulation patterns</p>
+        </div>
+
+
+        <div class="frames-container">
+            <h3 style="color: #ccc;">Processed Frames</h3> {# You might want to remove or change this heading now #}
+            {% if preprocessed_images %}
+                <div class="image-grid">
+                    {% for image_name in preprocessed_images %}
+                        <img src="{{ MEDIA_URL }}{{ image_name }}" alt="Preprocessed Frame">
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p style="color: #ccc;">No preprocessed frames to display.</p>
+            {% endif %}
+        </div>
+
+        <div class="faces-container">
+            <h3 style="color: #ccc;">Cropped Faces</h3> {# You might want to keep this or adjust its position #}
+            {% if faces_cropped_images %}
+                <div class="image-grid">
+                    {% for image_name in faces_cropped_images %}
+                         <img src="{{ MEDIA_URL }}{{ image_name }}" alt="Cropped Face">
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p style="color: #ccc;">No cropped faces to display.</p>
+            {% endif %}
+        </div>
+    {% endif %}
+    <p><a href="{% url 'upload_video' %}">Detect another video</a></p>
+</div>
+{% endblock %}

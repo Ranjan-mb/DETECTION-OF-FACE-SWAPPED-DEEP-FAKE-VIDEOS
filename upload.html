@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Upload Video{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1><i style="color:#b388ff;">Deepfake</i> Video Detection</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.video_file.id_for_label }}">Upload Video File:</label>
+            <div id="drop-area">
+                <p>Drag & drop a video file here or click to select</p>
+                {{ form.video_file }}
+            </div>
+            {% if form.video_file.errors %}
+                <div class="errorlist">
+                    {% for error in form.video_file.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.sequence_length.id_for_label }}">Sequence Length:</label>
+            {{ form.sequence_length }}
+            {% if form.sequence_length.errors %}
+                <div class="errorlist">
+                    {% for error in form.sequence_length.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <small>Number of frames to process from the video.</small>
+        </div>
+
+        <button type="submit">Detect</button>
+
+        {# Add the supported formats text below the button #}
+        <p class="supported-formats-text">Supported formats: MP4, AVI, MOV (Max size: 100MB)</p>
+
+    </form>
+</div>
+{% endblock %}

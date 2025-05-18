@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<style>
+    /* Add or adapt styling for static content pages */
+    .static-content-container {
+        background-color: #2a2a40; /* Dark background */
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+        width: 90%;
+        max-width: 800px; /* Wider container for content */
+        border: 2px solid #9b59b6; /* Accent color */
+        margin: 50px auto;
+        color: #f0f0f0; /* Light text color */
+        text-align: left; /* Align text left */
+        line-height: 1.6; /* Improve readability */
+    }
+
+    .static-content-container h2 {
+        color: #bb86fc; /* Header color */
+        margin-top: 0;
+        margin-bottom: 25px;
+        font-size: 28px;
+        text-align: center; /* Center the main heading */
+    }
+
+    .static-content-container h3 {
+        color: #d1aaff; /* Subheading color */
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 22px;
+    }
+
+    .static-content-container {
+        background-color: #2a2a40;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+        width: 95%; /* Increase width percentage */
+        max-width: 1100px; /* Increase maximum width (adjust as needed) */
+        border: 2px solid #9b59b6;
+        /* margin: 50px auto; Keeping margin: 0 auto; with the wrapper */
+        margin: 0 auto; /* Ensure horizontal centering */
+        color: #f0f0f0;
+        text-align: left;
+        line-height: 1.6;
+    }
+</style>
+
+<div class="static-content-container">
+    <h2>About Deepfake Detector</h2>
+
+    <p>Welcome to Deepfake Detector, your trusted tool in the fight against synthetic media manipulation. In an age where digital content can be easily altered, identifying deepfakes is crucial for maintaining trust and verifying information.</p>
+
+    <p>Our application utilizes cutting-edge machine learning models to analyze video content and determine the likelihood of it being a deepfake. We are committed to providing a simple and effective way for users to assess the authenticity of videos.</p>
+
+    <h3>Our Mission</h3>
+    <p>Our mission is to empower individuals and organizations with the ability to identify and combat the spread of malicious deepfake videos. We aim to contribute to a more secure and trustworthy digital environment.</p>
+
+    <h3>How it Works</h3>
+    <p>The Deepfake Detector analyzes key features within video frames, including facial inconsistencies and other artifacts often present in manipulated media. By leveraging sophisticated algorithms trained on large datasets, the model provides a prediction and confidence score.</p>
+
+    <p><strong>Note:</strong> While our model is highly accurate, deepfake technology is constantly evolving. Our tool should be used as an aid in assessing video authenticity, but manual review and cross-referencing with other information sources are always recommended for critical decisions.</p>
+
+</div>
+{% endblock %}

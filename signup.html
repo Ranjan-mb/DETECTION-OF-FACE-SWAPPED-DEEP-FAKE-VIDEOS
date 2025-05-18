@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<style>
+    /* Add or modify styles to fit your dark theme */
+    .auth-container {
+        background-color: #2a2a40; /* Darker background */
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        width: 90%;
+        max-width: 500px; /* Adjust max-width */
+        border: 2px solid #9b59b6; /* Accent color */
+        margin: 50px auto;
+        color: #f0f0f0; /* Light text color */
+    }
+
+    .auth-container h2 {
+        color: #bb86fc; /* Header color */
+        margin-bottom: 30px;
+        font-size: 28px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #ddd;
+        font-weight: bold;
+    }
+
+    .form-group input[type="email"],
+    .form-group input[type="password"] {
+        padding: 12px;
+        border: 1px solid #b388ff; /* Input border color */
+        border-radius: 5px;
+        width: 100%;
+        font-size: 16px;
+        background-color: #1e1e2f; /* Input background */
+        color: #f1f1f1; /* Input text color */
+        box-sizing: border-box;
+        transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    .form-group input[type="email"]:focus,
+    .form-group input[type="password"]:focus {
+        border-color: #d1aaff; /* Input border focus color */
+        outline: none;
+        background-color: #29293d; /* Input background focus */
+    }
+
+    button[type="submit"] {
+        padding: 14px 30px;
+        background-color: #b388ff; /* Button background */
+        color: #1e1e2f; /* Button text color */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #d1aaff; /* Button background hover */
+        color: #000; /* Button text color hover */
+    }
+
+    .errorlist {
+        color: #ff6b6b; /* Error text color */
+        margin-top: 5px;
+        text-align: left;
+        padding-left: 0;
+        list-style: none;
+    }
+
+     .errorlist li {
+        margin-bottom: 5px;
+     }
+
+     .login-link {
+         margin-top: 20px;
+         display: block;
+         color: #bb86fc; /* Link color */
+         text-decoration: none;
+         transition: color 0.3s ease;
+     }
+
+     .login-link:hover {
+         color: #d1aaff; /* Link color hover */
+     }
+
+</style>
+
+<div class="auth-container">
+    <h2>Sign Up</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                {{ field }}
+                {% if field.errors %}
+                    <ul class="errorlist">
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% endfor %}
+        {% if form.non_field_errors %}
+            <ul class="errorlist">
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <button type="submit">Sign Up</button>
+    </form>
+    <a href="{% url 'login' %}" class="login-link">Already have an account? Log in</a>
+</div>
+{% endblock %}

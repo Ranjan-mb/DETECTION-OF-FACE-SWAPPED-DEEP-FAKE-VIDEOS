@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Legal Information{% endblock %}
+
+{% block content %}
+<style>
+     /* Re-use or adapt styles from about.html */
+    .static-content-container {
+        background-color: #2a2a40;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+        width: 90%;
+        max-width: 800px;
+        border: 2px solid #9b59b6;
+        margin: 50px auto;
+        color: #f0f0f0;
+        text-align: left;
+        line-height: 1.6;
+    }
+
+    .static-content-container h2 {
+        color: #bb86fc;
+        margin-top: 0;
+        margin-bottom: 25px;
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .static-content-container h3 {
+        color: #d1aaff;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 22px;
+    }
+
+    .static-content-container {
+        background-color: #2a2a40;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+        width: 95%; /* Increase width percentage */
+        max-width: 1100px; /* Increase maximum width (adjust as needed) */
+        border: 2px solid #9b59b6;
+        /* margin: 50px auto; Keeping margin: 0 auto; with the wrapper */
+        margin: 0 auto; /* Ensure horizontal centering */
+        color: #f0f0f0;
+        text-align: left;
+        line-height: 1.6;
+    }
+
+    .legal-section {
+        margin-bottom: 30px;
+    }
+</style>
+
+<div class="static-content-container">
+    <h2>Legal Information</h2>
+
+    <div class="legal-section">
+        <h3>Terms of Service</h3>
+        <p>By using the Deepfake Detector application, you agree to the following terms and conditions:</p>
+        <ul>
+            <li>The service is provided for informational purposes only.</li>
+            <li>We do not store uploaded videos longer than necessary for analysis.</li>
+            <li>You are responsible for the content you upload.</li>
+            <li>We do not guarantee the accuracy of predictions and are not liable for any decisions made based on the analysis.</li>
+            <li>The service is subject to change or termination without notice.</li>
+            <li>You agree not to use the service for any illegal or unauthorized purposes.</li>
+        </ul>
+    </div>
+
+    <div class="legal-section">
+        <h3>Privacy Policy</h3>
+        <p>Your privacy is important to us. This policy explains how we collect, use, and protect your information:</p>
+        <ul>
+            <li>We collect technical data related to video analysis (e.g., frames analyzed, processing time).</li>
+            <li>If you sign up, we store your email and a hashed password in Firestore.</li>
+            <li>We do not share your personal information with third parties without your consent, except as required by law.</li>
+            <li>Uploaded videos are deleted after analysis.</li>
+            <li>We use industry-standard security measures to protect your data.</li>
+            <li>You have the right to request deletion of your account and associated data.</li>
+        </ul>
+         <p>For questions about our privacy practices, please contact us using the information on the Contact page.</p>
+    </div>
+
+    <p>Last updated: 10/04/2025</p> 
+</div>
+{% endblock %}
